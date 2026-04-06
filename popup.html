@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    body {
+      margin: 0;
+      width: 280px;
+      background: #0f172a;
+      color: #e2e8f0;
+    }
+
+    .container {
+      padding: 16px;
+    }
+
+    .title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .card {
+      background: #1e293b;
+      border-radius: 12px;
+      padding: 12px;
+      margin-bottom: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    .status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: gray;
+    }
+
+    .connected {
+      background: #22c55e;
+    }
+
+    .disconnected {
+      background: #ef4444;
+    }
+
+    .info {
+      margin-top: 8px;
+      font-size: 12px;
+      opacity: 0.8;
+      line-height: 1.4;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .connect {
+      background: #22c55e;
+      color: white;
+    }
+
+    .connect:hover {
+      background: #16a34a;
+    }
+
+    .disconnect {
+      background: #ef4444;
+      color: white;
+      margin-top: 8px;
+    }
+
+    .disconnect:hover {
+      background: #dc2626;
+    }
+
+    .ip {
+      font-size: 12px;
+      margin-top: 6px;
+      color: #38bdf8;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="title">🚀 Proxy Controller</div>
+
+    <div class="card">
+      <div class="status">
+        <div id="dot" class="dot"></div>
+        <span id="statusText">Checking status...</span>
+      </div>
+
+      <div class="info" id="proxyInfo"></div>
+      <div class="ip" id="ipInfo"></div>
+    </div>
+
+    <button id="connect" class="btn connect">CONNECT</button>
+    <button id="disconnect" class="btn disconnect">STOP</button>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
