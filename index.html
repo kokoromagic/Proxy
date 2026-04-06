@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proxy Status</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+body {
+  margin: 0;
+  background: #0f172a;
+  color: #e2e8f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  width: 320px;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.card {
+  background: #1e293b;
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.online {
+  background: #22c55e;
+}
+
+.offline {
+  background: #ef4444;
+}
+
+.proxy {
+  font-size: 14px;
+  margin-bottom: 10px;
+  word-break: break-all;
+}
+
+.time {
+  font-size: 13px;
+  opacity: 0.8;
+  line-height: 1.5;
+}
+
+.progress {
+  margin-top: 12px;
+  height: 6px;
+  background: #334155;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.bar {
+  height: 100%;
+  background: linear-gradient(90deg, #22c55e, #4ade80);
+  width: 0%;
+  transition: width 0.5s;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 11px;
+  opacity: 0.5;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <div class="title">🚀 Proxy Status</div>
+
+  <div class="card">
+    <div class="status">
+      <div id="dot" class="dot offline"></div>
+      <span id="statusText">Loading...</span>
+    </div>
+
+    <div id="proxy" class="proxy"></div>
+
+    <div class="time" id="timeInfo"></div>
+
+    <div class="progress">
+      <div id="bar" class="bar"></div>
+    </div>
+  </div>
+
+  <div class="footer">Auto refresh per 5s</div>
+</div>
+
+<script>
+const API = "/Proxy/pinggy_tunnel_info.json";
+
+async function load() {
+  try {
+    const res = await fetch(API + "?t=" + Date.now());
+    const data = await res.json();
+
+    const now = Math.floor(Date.now() / 1000);
+
+    const start = data.start_time;
+    const elapsed = now - start;
+    const total = 3600;
+
+    const remaining = Math.max(total - elapsed, 0);
+
+    // format time
+    function format(sec) {
+      const m = Math.floor(sec / 60);
+      const s = sec % 60;
+      return `${m}m ${s}s`;
+    }
+
+    // UI update
+    document.getElementById("dot").className = "dot online";
+    document.getElementById("statusText").innerText = "Working";
+
+    document.getElementById("proxy").innerText =
+      `${data.host}:${data.port}`;
+
+    document.getElementById("timeInfo").innerHTML = `
+      ⏱ Running time: ${format(elapsed)}<br>
+      ⏳ Remaining time: ${format(remaining)}
+    `;
+
+    // progress bar
+    const percent = Math.min((elapsed / total) * 100, 100);
+    document.getElementById("bar").style.width = percent + "%";
+
+  } catch (e) {
+    document.getElementById("dot").className = "dot offline";
+    document.getElementById("statusText").innerText = "Unable to fetch proxy";
+    document.getElementById("proxy").innerText = "";
+    document.getElementById("timeInfo").innerText = "";
+    document.getElementById("bar").style.width = "0%";
+  }
+}
+
+// load by first time
+load();
+
+// auto refresh
+setInterval(load, 5000);
+</script>
+
+</body>
+</html>
