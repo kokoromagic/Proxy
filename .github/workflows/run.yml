@@ -1,0 +1,59 @@
+name: Remote Proxy Server
+
+on: 
+  workflow_dispatch:
+    inputs:
+      proxy_user:
+        description: 'Proxy Username'
+        required: true
+        default: 'admin'
+      proxy_pass:
+        description: 'Proxy Password'
+        required: true
+        default: '1111'
+      anonymous:
+        description: "Anonymous mode (no authentication, no credentials needed)"
+        default: true
+        required: false
+        type: boolean
+      traffic_logging:
+        description: "Enable traffic logging (logs all requests to console)"
+        default: false
+        required: false
+        type: boolean
+      bridge_workflows:
+        description: "Bridge the workflows"
+        default: false
+        required: false
+        type: boolean
+
+jobs:
+  run-proxy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          repository: vincentng295/customproxy
+          ref: main
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run Proxy Server
+        env:
+          PROXY_USER: ${{ github.event.inputs.proxy_user }}
+          PROXY_PASS: ${{ github.event.inputs.proxy_pass }}
+          PYTHONUNBUFFERED: "1"
+          ANONYMOUS: ${{ github.event.inputs.anonymous }}
+          TRAFFIC_LOGGING: ${{ github.event.inputs.traffic_logging }}
+          BRIDGE_WORKFLOWS: ${{ github.event.inputs.bridge_workflows }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python gitactions.py
