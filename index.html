@@ -122,6 +122,13 @@ body {
 <script>
 const API = "/Proxy/pinggy_tunnel_info.json";
 
+function format(sec) {
+  sec = Math.max(sec, 0);
+  const m = Math.floor(sec / 60);
+  const s = sec % 60;
+  return `${m}m ${s}s`;
+}
+
 async function load() {
   try {
     const res = await fetch(API + "?t=" + Date.now());
@@ -130,33 +137,50 @@ async function load() {
     const now = Math.floor(Date.now() / 1000);
 
     const start = data.start_time;
+    const end = data.end_time || (start + 3600);
+
     const elapsed = now - start;
-    const total = 3600;
+    const remaining = end - now;
+    const total = end - start;
 
-    const remaining = Math.max(total - elapsed, 0);
+    const dot = document.getElementById("dot");
+    const statusText = document.getElementById("statusText");
+    const proxyEl = document.getElementById("proxy");
+    const timeEl = document.getElementById("timeInfo");
+    const bar = document.getElementById("bar");
 
-    // format time
-    function format(sec) {
-      const m = Math.floor(sec / 60);
-      const s = sec % 60;
-      return `${m}m ${s}s`;
+    // offline
+    if (now >= end) {
+      dot.className = "dot offline";
+      statusText.innerText = "Service Unavailable";
+
+      proxyEl.innerText = `${data.host}:${data.port}`;
+
+      timeEl.innerHTML = `
+        ⛔ Proxy expired<br>
+        ⏱ Total time: ${format(total)}
+      `;
+
+      bar.style.width = "100%";
+      bar.style.background = "#ef4444";
+
+      return;
     }
 
-    // UI update
-    document.getElementById("dot").className = "dot online";
-    document.getElementById("statusText").innerText = "Working";
+    // working
+    dot.className = "dot online";
+    statusText.innerText = "Working";
 
-    document.getElementById("proxy").innerText =
-      `${data.host}:${data.port}`;
+    proxyEl.innerText = `${data.host}:${data.port}`;
 
-    document.getElementById("timeInfo").innerHTML = `
-      ⏱ Running time: ${format(elapsed)}<br>
-      ⏳ Remaining time: ${format(remaining)}
+    timeEl.innerHTML = `
+      ⏱ Running: ${format(elapsed)}<br>
+      ⏳ Remaining: ${format(remaining)}
     `;
 
-    // progress bar
     const percent = Math.min((elapsed / total) * 100, 100);
-    document.getElementById("bar").style.width = percent + "%";
+    bar.style.width = percent + "%";
+    bar.style.background = "linear-gradient(90deg, #22c55e, #4ade80)";
 
   } catch (e) {
     document.getElementById("dot").className = "dot offline";
@@ -170,7 +194,7 @@ async function load() {
 // load by first time
 load();
 
-// auto refresh
+// refresh per 5s
 setInterval(load, 5000);
 </script>
 
