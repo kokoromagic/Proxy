@@ -64,6 +64,10 @@ body {
   font-size: 14px;
   margin-bottom: 10px;
   word-break: break-all;
+  font-family: "Consolas", monospace;
+  background: #0f172a;
+  padding: 8px;
+  border-radius: 6px;
 }
 
 .time {
@@ -86,6 +90,32 @@ body {
   width: 0%;
   transition: width 0.5s;
 }
+
+/* --- New Button Styles --- */
+.download-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
+  padding: 10px;
+  background: #3b82f6;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.download-btn:hover {
+  background: #2563eb;
+}
+
+.download-btn:active {
+  transform: scale(0.98);
+}
+/* ------------------------- */
 
 .footer {
   text-align: center;
@@ -114,6 +144,14 @@ body {
     <div class="progress">
       <div id="bar" class="bar"></div>
     </div>
+
+    <a href="https://github.com/kokoromagic/Proxy/releases/latest" target="_blank" class="download-btn">
+      <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+        <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+      </svg>
+      Download Extension
+    </a>
   </div>
 
   <div class="footer">Auto refresh per 5s</div>
@@ -191,10 +229,7 @@ async function load() {
   }
 }
 
-// load by first time
 load();
-
-// refresh per 5s
 setInterval(load, 5000);
 </script>
 
