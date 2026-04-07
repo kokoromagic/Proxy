@@ -25,14 +25,20 @@ async function updateUI() {
     }
 }
 
+chrome.storage.onChanged.addListener((changes, area) => {
+    if (area === "local") {
+        updateUI();
+    }
+});
+
 document.getElementById("connect").onclick = () => {
     chrome.runtime.sendMessage({ action: "connect" });
-    setTimeout(updateUI, 1000);
+	dot.className = "dot connected";
+	statusText.innerText = "Connecting to server...";
 };
 
 document.getElementById("disconnect").onclick = () => {
     chrome.runtime.sendMessage({ action: "disconnect" });
-    setTimeout(updateUI, 500);
 };
 
 updateUI();
