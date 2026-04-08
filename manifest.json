@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Dynamic Proxy Connector",
-  "version": "2.0",
+  "version": "2.1",
   "permissions": [
     "proxy",
     "storage",
@@ -10,7 +10,8 @@
   ],
   "host_permissions": [
     "https://kokoromagic.github.io/*",
-    "https://api.ipify.org/*"
+    "https://api.ipify.org/*",
+    "http://connectivitycheck.gstatic.com/*"
   ],
   "background": {
     "service_worker": "background.js"
