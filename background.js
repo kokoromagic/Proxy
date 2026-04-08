@@ -68,6 +68,31 @@ async function getIP() {
 }
 
 /**
+ * Use to check if proxy is ok
+ */
+async function checkProxyAlive(timeout = 5000) {
+    const controller = new AbortController();
+    const id = setTimeout(() => controller.abort(), timeout);
+
+    try {
+        const res = await fetch(
+            "http://connectivitycheck.gstatic.com/generate_204",
+            {
+                method: "GET",
+                cache: "no-store",
+                signal: controller.signal
+            }
+        );
+
+        clearTimeout(id);
+        return res.status === 204;
+
+    } catch {
+        return false;
+    }
+}
+
+/**
  * Core connection logic
  */
 async function connect() {
@@ -78,8 +103,9 @@ async function connect() {
         // Small delay to let the browser apply proxy settings before checking IP
         setTimeout(async () => {
             const ip = await getIP();
-            
-            if (!ip) {
+            const ok = await checkProxyAlive();
+
+            if (!ok) {
                 console.error("Proxy unreachable on connect. Aborting.");
                 await disconnect();
                 return;
@@ -172,8 +198,8 @@ setInterval(async () => {
     const data = await chrome.storage.local.get(["connected"]);
     if (!data.connected) return;
 
-    const ip = await getIP();
-    if (!ip) {
+    const ok = await checkProxyAlive();
+    if (!ok) {
         console.warn("Proxy heartbeat failed. Triggering Kill Switch.");
         await disconnect(); 
     }
