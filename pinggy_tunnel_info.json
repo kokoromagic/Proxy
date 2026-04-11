@@ -1,8 +1,8 @@
 {
-    "host": "gypev-20-168-117-146.run.pinggy-free.link",
-    "port": 34513,
+    "host": "bmaap-172-174-157-129.run.pinggy-free.link",
+    "port": 44707,
     "auth": null,
-    "ip": "20.168.117.146",
-    "start_time": 1775905073,
-    "end_time": 1775908673
+    "ip": "172.174.157.129",
+    "start_time": 1775908083,
+    "end_time": 1775911683
 }
