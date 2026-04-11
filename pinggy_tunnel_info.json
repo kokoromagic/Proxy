@@ -1,8 +1,8 @@
 {
-    "host": "xbcfg-20-172-6-68.run.pinggy-free.link",
-    "port": 41577,
+    "host": "tujiu-172-182-226-201.run.pinggy-free.link",
+    "port": 36407,
     "auth": null,
-    "ip": "20.172.6.68",
-    "start_time": 1775877960,
-    "end_time": 1775881560
+    "ip": "172.182.226.201",
+    "start_time": 1775880974,
+    "end_time": 1775884574
 }
