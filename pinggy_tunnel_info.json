@@ -1,8 +1,8 @@
 {
-    "host": "jpihd-172-183-131-18.run.pinggy-free.link",
-    "port": 46477,
+    "host": "fenyc-172-214-104-52.run.pinggy-free.link",
+    "port": 42603,
     "auth": null,
-    "ip": "172.183.131.18",
-    "start_time": 1775944225,
-    "end_time": 1775947825
+    "ip": "172.214.104.52",
+    "start_time": 1775947236,
+    "end_time": 1775950836
 }
