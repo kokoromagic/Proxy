@@ -1,8 +1,8 @@
 {
-    "host": "qatad-52-161-82-81.run.pinggy-free.link",
-    "port": 35263,
+    "host": "dbckb-4-236-151-0.run.pinggy-free.link",
+    "port": 41403,
     "auth": null,
-    "ip": "52.161.82.81",
-    "start_time": 1775862882,
-    "end_time": 1775866482
+    "ip": "4.236.151.0",
+    "start_time": 1775865901,
+    "end_time": 1775869501
 }
