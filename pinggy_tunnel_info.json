@@ -1,8 +1,8 @@
 {
-    "host": "pcslu-172-184-211-65.run.pinggy-free.link",
-    "port": 33887,
+    "host": "dtzor-172-182-203-52.run.pinggy-free.link",
+    "port": 45293,
     "auth": null,
-    "ip": "172.184.211.65",
-    "start_time": 1776016543,
-    "end_time": 1776020143
+    "ip": "172.182.203.52",
+    "start_time": 1776019562,
+    "end_time": 1776023162
 }
