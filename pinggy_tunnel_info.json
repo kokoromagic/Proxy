@@ -1,8 +1,8 @@
 {
-    "host": "sjoum-20-106-182-210.run.pinggy-free.link",
-    "port": 40269,
+    "host": "eeake-172-184-213-241.run.pinggy-free.link",
+    "port": 37833,
     "auth": null,
-    "ip": "20.106.182.210",
-    "start_time": 1776025589,
-    "end_time": 1776029189
+    "ip": "172.184.213.241",
+    "start_time": 1776028601,
+    "end_time": 1776032201
 }
