@@ -1,8 +1,8 @@
 {
-    "host": "uxxec-64-236-177-0.run.pinggy-free.link",
-    "port": 42315,
+    "host": "pcslu-172-184-211-65.run.pinggy-free.link",
+    "port": 33887,
     "auth": null,
-    "ip": "64.236.177.0",
-    "start_time": 1776013531,
-    "end_time": 1776017131
+    "ip": "172.184.211.65",
+    "start_time": 1776016543,
+    "end_time": 1776020143
 }
