@@ -1,8 +1,8 @@
 {
-    "host": "reqrm-172-215-217-104.run.pinggy-free.link",
-    "port": 37291,
+    "host": "sianc-135-232-232-40.run.pinggy-free.link",
+    "port": 40875,
     "auth": null,
-    "ip": "172.215.217.104",
-    "start_time": 1776031615,
-    "end_time": 1776035215
+    "ip": "135.232.232.40",
+    "start_time": 1776034627,
+    "end_time": 1776038227
 }
