@@ -1,8 +1,8 @@
 {
-    "host": "hxsrg-135-232-232-82.run.pinggy-free.link",
-    "port": 42905,
+    "host": "ikols-172-210-149-49.run.pinggy-free.link",
+    "port": 45503,
     "auth": null,
-    "ip": "135.232.232.82",
-    "start_time": 1776007507,
-    "end_time": 1776011107
+    "ip": "172.210.149.49",
+    "start_time": 1776010519,
+    "end_time": 1776014119
 }
