@@ -1,8 +1,8 @@
 {
-    "host": "frewo-20-168-111-67.run.pinggy-free.link",
-    "port": 41635,
+    "host": "mmsez-172-184-204-98.run.pinggy-free.link",
+    "port": 41809,
     "auth": null,
-    "ip": "20.168.111.67",
-    "start_time": 1776216383,
-    "end_time": 1776219983
+    "ip": "172.184.204.98",
+    "start_time": 1776219399,
+    "end_time": 1776222999
 }
