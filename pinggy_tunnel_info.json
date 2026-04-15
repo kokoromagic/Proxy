@@ -1,8 +1,8 @@
 {
-    "host": "ymqpc-172-184-211-115.run.pinggy-free.link",
-    "port": 39677,
+    "host": "dvbby-135-237-130-181.run.pinggy-free.link",
+    "port": 45623,
     "auth": null,
-    "ip": "172.184.211.115",
-    "start_time": 1776288779,
-    "end_time": 1776292379
+    "ip": "135.237.130.181",
+    "start_time": 1776291793,
+    "end_time": 1776295393
 }
