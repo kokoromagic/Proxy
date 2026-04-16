@@ -1,8 +1,8 @@
 {
-    "host": "qtnom-68-220-58-148.run.pinggy-free.link",
-    "port": 35707,
+    "host": "vvamm-128-24-161-24.run.pinggy-free.link",
+    "port": 44611,
     "auth": null,
-    "ip": "68.220.58.148",
-    "start_time": 1776361163,
-    "end_time": 1776364763
+    "ip": "128.24.161.24",
+    "start_time": 1776364180,
+    "end_time": 1776367780
 }
