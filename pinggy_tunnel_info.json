@@ -1,8 +1,8 @@
 {
-    "host": "icoqa-52-162-137-102.run.pinggy-free.link",
-    "port": 38741,
+    "host": "modkh-172-182-226-137.run.pinggy-free.link",
+    "port": 34203,
     "auth": null,
-    "ip": "52.162.137.102",
-    "start_time": 1776330985,
-    "end_time": 1776334585
+    "ip": "172.182.226.137",
+    "start_time": 1776334000,
+    "end_time": 1776337600
 }
