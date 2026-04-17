@@ -1,8 +1,8 @@
 {
-    "host": "cukpe-172-178-118-198.run.pinggy-free.link",
-    "port": 38719,
+    "host": "fwtha-172-182-213-146.run.pinggy-free.link",
+    "port": 35517,
     "auth": null,
-    "ip": "172.178.118.198",
-    "start_time": 1776418422,
-    "end_time": 1776422022
+    "ip": "172.182.213.146",
+    "start_time": 1776421438,
+    "end_time": 1776425038
 }
