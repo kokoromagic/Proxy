@@ -1,8 +1,8 @@
 {
-    "host": "fwtha-172-182-213-146.run.pinggy-free.link",
-    "port": 35517,
+    "host": "qoslo-172-183-132-69.run.pinggy-free.link",
+    "port": 45309,
     "auth": null,
-    "ip": "172.182.213.146",
-    "start_time": 1776421438,
-    "end_time": 1776425038
+    "ip": "172.183.132.69",
+    "start_time": 1776424453,
+    "end_time": 1776428053
 }
