@@ -1,8 +1,8 @@
 {
-    "host": "tptgi-172-183-131-195.run.pinggy-free.link",
-    "port": 43337,
+    "host": "itzno-20-161-30-51.run.pinggy-free.link",
+    "port": 42141,
     "auth": null,
-    "ip": "172.183.131.195",
-    "start_time": 1776632395,
-    "end_time": 1776635995
+    "ip": "20.161.30.51",
+    "start_time": 1776635406,
+    "end_time": 1776639006
 }
