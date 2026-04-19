@@ -1,8 +1,8 @@
 {
-    "host": "cwggh-172-208-127-194.run.pinggy-free.link",
-    "port": 43035,
+    "host": "tptgi-172-183-131-195.run.pinggy-free.link",
+    "port": 43337,
     "auth": null,
-    "ip": "172.208.127.194",
-    "start_time": 1776629385,
-    "end_time": 1776632985
+    "ip": "172.183.131.195",
+    "start_time": 1776632395,
+    "end_time": 1776635995
 }
