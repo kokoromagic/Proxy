@@ -1,8 +1,8 @@
 {
-    "host": "uniis-172-203-7-53.run.pinggy-free.link",
-    "port": 35357,
+    "host": "scixl-52-154-131-102.run.pinggy-free.link",
+    "port": 33635,
     "auth": null,
-    "ip": "172.203.7.53",
-    "start_time": 1776656492,
-    "end_time": 1776660092
+    "ip": "52.154.131.102",
+    "start_time": 1776659505,
+    "end_time": 1776663105
 }
