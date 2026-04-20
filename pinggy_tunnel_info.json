@@ -1,8 +1,8 @@
 {
-    "host": "afhue-64-236-169-5.run.pinggy-free.link",
-    "port": 38773,
+    "host": "uniis-172-203-7-53.run.pinggy-free.link",
+    "port": 35357,
     "auth": null,
-    "ip": "64.236.169.5",
-    "start_time": 1776653478,
-    "end_time": 1776657078
+    "ip": "172.203.7.53",
+    "start_time": 1776656492,
+    "end_time": 1776660092
 }
