@@ -1,8 +1,8 @@
 {
-    "host": "scmnu-172-184-220-153.run.pinggy-free.link",
-    "port": 40339,
+    "host": "uxgos-172-174-165-225.run.pinggy-free.link",
+    "port": 44253,
     "auth": null,
-    "ip": "172.184.220.153",
-    "start_time": 1776737898,
-    "end_time": 1776741498
+    "ip": "172.174.165.225",
+    "start_time": 1776740912,
+    "end_time": 1776744512
 }
