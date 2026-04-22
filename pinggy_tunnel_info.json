@@ -1,8 +1,8 @@
 {
-    "host": "whjss-40-76-191-136.run.pinggy-free.link",
-    "port": 33901,
+    "host": "jwjun-135-232-201-35.run.pinggy-free.link",
+    "port": 35371,
     "auth": null,
-    "ip": "40.76.191.136",
-    "start_time": 1776885618,
-    "end_time": 1776889218
+    "ip": "{\"error\": \"Too Many Requests\"}",
+    "start_time": 1776888631,
+    "end_time": 1776892231
 }
