@@ -1,8 +1,8 @@
 {
-    "host": "dcexs-135-232-177-244.run.pinggy-free.link",
-    "port": 45135,
+    "host": "bpfwv-172-203-196-234.run.pinggy-free.link",
+    "port": 46061,
     "auth": null,
-    "ip": "135.232.177.244",
-    "start_time": 1776955237,
-    "end_time": 1776958837
+    "ip": "172.203.196.234",
+    "start_time": 1776958250,
+    "end_time": 1776961850
 }
