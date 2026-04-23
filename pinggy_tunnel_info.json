@@ -1,8 +1,8 @@
 {
-    "host": "bpfwv-172-203-196-234.run.pinggy-free.link",
-    "port": 46061,
+    "host": "gragc-52-190-182-112.run.pinggy-free.link",
+    "port": 37019,
     "auth": null,
-    "ip": "172.203.196.234",
-    "start_time": 1776958250,
-    "end_time": 1776961850
+    "ip": "52.190.182.112",
+    "start_time": 1776964280,
+    "end_time": 1776967880
 }
