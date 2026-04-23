@@ -1,8 +1,8 @@
 {
-    "host": "bocsy-13-64-25-179.run.pinggy-free.link",
-    "port": 46535,
+    "host": "vmyuo-172-184-214-216.run.pinggy-free.link",
+    "port": 37377,
     "auth": null,
-    "ip": "13.64.25.179",
-    "start_time": 1776979358,
-    "end_time": 1776982958
+    "ip": "172.184.214.216",
+    "start_time": 1776982371,
+    "end_time": 1776985971
 }
