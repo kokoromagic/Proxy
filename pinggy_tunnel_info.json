@@ -1,8 +1,8 @@
 {
-    "host": "zpgpd-64-236-201-40.run.pinggy-free.link",
-    "port": 42323,
+    "host": "aruju-20-171-55-49.run.pinggy-free.link",
+    "port": 41433,
     "auth": null,
-    "ip": "64.236.201.40",
-    "start_time": 1777069821,
-    "end_time": 1777073421
+    "ip": "20.171.55.49",
+    "start_time": 1777072835,
+    "end_time": 1777076435
 }
