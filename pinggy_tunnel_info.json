@@ -1,8 +1,8 @@
 {
-    "host": "vosdb-172-182-195-129.run.pinggy-free.link",
-    "port": 35031,
+    "host": "xyitz-64-236-161-41.run.pinggy-free.link",
+    "port": 43101,
     "auth": null,
-    "ip": "172.182.195.129",
-    "start_time": 1777115020,
-    "end_time": 1777118620
+    "ip": "64.236.161.41",
+    "start_time": 1777118032,
+    "end_time": 1777121632
 }
