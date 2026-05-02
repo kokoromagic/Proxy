@@ -1,8 +1,8 @@
 {
-    "host": "enhdp-135-232-211-213.run.pinggy-free.link",
-    "port": 45257,
+    "host": "saiwm-51-8-152-228.run.pinggy-free.link",
+    "port": 39839,
     "auth": null,
-    "ip": "{\"error\": \"Too Many Requests\"}",
-    "start_time": 1777752325,
-    "end_time": 1777755925
+    "ip": "51.8.152.228",
+    "start_time": 1777755339,
+    "end_time": 1777758939
 }
