@@ -1,8 +1,8 @@
 {
-    "host": "cdvcu-172-215-218-19.run.pinggy-free.link",
-    "port": 46671,
+    "host": "kirnx-20-161-70-176.run.pinggy-free.link",
+    "port": 42345,
     "auth": null,
-    "ip": "172.215.218.19",
-    "start_time": 1777897113,
-    "end_time": 1777900713
+    "ip": "20.161.70.176",
+    "start_time": 1777900135,
+    "end_time": 1777903735
 }
