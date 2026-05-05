@@ -1,8 +1,8 @@
 {
-    "host": "lzgcd-20-168-109-82.run.pinggy-free.link",
-    "port": 36861,
+    "host": "lsndp-172-208-125-194.run.pinggy-free.link",
+    "port": 38731,
     "auth": null,
-    "ip": "20.168.109.82",
-    "start_time": 1777957475,
-    "end_time": 1777961075
+    "ip": "172.208.125.194",
+    "start_time": 1777960495,
+    "end_time": 1777964095
 }
