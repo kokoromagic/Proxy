@@ -1,8 +1,8 @@
 {
-    "host": "udtse-172-215-231-123.run.pinggy-free.link",
-    "port": 42557,
+    "host": "taneu-52-154-132-169.run.pinggy-free.link",
+    "port": 41471,
     "auth": null,
-    "ip": "172.215.231.123",
-    "start_time": 1777972587,
-    "end_time": 1777976187
+    "ip": "52.154.132.169",
+    "start_time": 1777975609,
+    "end_time": 1777979209
 }
