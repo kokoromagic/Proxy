@@ -1,8 +1,8 @@
 {
-    "host": "figvg-172-182-213-146.run.pinggy-free.link",
-    "port": 36629,
+    "host": "udtse-172-215-231-123.run.pinggy-free.link",
+    "port": 42557,
     "auth": null,
-    "ip": "172.182.213.146",
-    "start_time": 1777969562,
-    "end_time": 1777973162
+    "ip": "172.215.231.123",
+    "start_time": 1777972587,
+    "end_time": 1777976187
 }
