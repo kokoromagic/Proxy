@@ -1,8 +1,8 @@
 {
-    "host": "lsndp-172-208-125-194.run.pinggy-free.link",
-    "port": 38731,
+    "host": "klwsp-20-161-30-199.run.pinggy-free.link",
+    "port": 43389,
     "auth": null,
-    "ip": "172.208.125.194",
-    "start_time": 1777960495,
-    "end_time": 1777964095
+    "ip": "20.161.30.199",
+    "start_time": 1777963518,
+    "end_time": 1777967118
 }
