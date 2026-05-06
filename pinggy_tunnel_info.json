@@ -1,8 +1,8 @@
 {
-    "host": "umcvi-68-220-62-145.run.pinggy-free.link",
-    "port": 42277,
+    "host": "tlzcs-172-208-153-23.run.pinggy-free.link",
+    "port": 40719,
     "auth": null,
-    "ip": "68.220.62.145",
-    "start_time": 1778029966,
-    "end_time": 1778033566
+    "ip": "172.208.153.23",
+    "start_time": 1778032980,
+    "end_time": 1778036580
 }
