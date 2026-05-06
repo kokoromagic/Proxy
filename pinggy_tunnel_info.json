@@ -1,8 +1,8 @@
 {
-    "host": "glwng-172-184-210-161.run.pinggy-free.link",
-    "port": 43849,
+    "host": "oaste-64-236-169-136.run.pinggy-free.link",
+    "port": 40403,
     "auth": null,
-    "ip": "172.184.210.161",
-    "start_time": 1778057113,
-    "end_time": 1778060713
+    "ip": "64.236.169.136",
+    "start_time": 1778060138,
+    "end_time": 1778063738
 }
