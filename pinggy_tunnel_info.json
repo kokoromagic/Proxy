@@ -1,8 +1,8 @@
 {
-    "host": "tlzcs-172-208-153-23.run.pinggy-free.link",
-    "port": 40719,
+    "host": "hkpit-20-236-100-1.run.pinggy-free.link",
+    "port": 45291,
     "auth": null,
-    "ip": "172.208.153.23",
-    "start_time": 1778032980,
-    "end_time": 1778036580
+    "ip": "20.236.100.1",
+    "start_time": 1778036000,
+    "end_time": 1778039600
 }
