@@ -1,8 +1,8 @@
 {
-    "host": "oscde-104-209-7-226.run.pinggy-free.link",
-    "port": 44553,
+    "host": "edudp-20-29-29-17.run.pinggy-free.link",
+    "port": 44213,
     "auth": null,
-    "ip": "104.209.7.226",
-    "start_time": 1778084326,
-    "end_time": 1778087926
+    "ip": "20.29.29.17",
+    "start_time": 1778087347,
+    "end_time": 1778090947
 }
