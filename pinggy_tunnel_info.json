@@ -1,8 +1,8 @@
 {
-    "host": "ocmbu-52-159-247-147.run.pinggy-free.link",
-    "port": 41583,
+    "host": "glwng-172-184-210-161.run.pinggy-free.link",
+    "port": 43849,
     "auth": null,
-    "ip": "52.159.247.147",
-    "start_time": 1778054092,
-    "end_time": 1778057692
+    "ip": "172.184.210.161",
+    "start_time": 1778057113,
+    "end_time": 1778060713
 }
