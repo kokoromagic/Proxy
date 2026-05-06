@@ -1,8 +1,8 @@
 {
-    "host": "wjafx-172-208-125-192.run.pinggy-free.link",
-    "port": 33703,
+    "host": "ipytv-4-236-158-54.run.pinggy-free.link",
+    "port": 46549,
     "auth": null,
-    "ip": "172.208.125.192",
-    "start_time": 1778063162,
-    "end_time": 1778066762
+    "ip": "4.236.158.54",
+    "start_time": 1778066178,
+    "end_time": 1778069778
 }
