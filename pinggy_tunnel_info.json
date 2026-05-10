@@ -1,8 +1,8 @@
 {
-    "host": "glldh-172-182-194-211.run.pinggy-free.link",
-    "port": 35739,
+    "host": "slosw-52-160-149-129.run.pinggy-free.link",
+    "port": 44333,
     "auth": null,
-    "ip": "172.182.194.211",
-    "start_time": 1778386139,
-    "end_time": 1778389739
+    "ip": "52.160.149.129",
+    "start_time": 1778389160,
+    "end_time": 1778392760
 }
