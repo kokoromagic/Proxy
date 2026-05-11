@@ -1,8 +1,8 @@
 {
-    "host": "qtmel-52-161-74-194.run.pinggy-free.link",
-    "port": 41867,
+    "host": "fwpsl-64-236-144-100.run.pinggy-free.link",
+    "port": 33955,
     "auth": null,
-    "ip": "52.161.74.194",
-    "start_time": 1778540048,
-    "end_time": 1778543648
+    "ip": "64.236.144.100",
+    "start_time": 1778543068,
+    "end_time": 1778546668
 }
