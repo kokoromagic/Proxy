@@ -18,7 +18,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
+  padding: 20px;
 }
 
 .container {
@@ -37,6 +38,16 @@ body {
   border-radius: 14px;
   padding: 16px;
   box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+  margin-bottom: 15px;
+}
+
+.label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #94a3b8;
+  margin-bottom: 6px;
+  display: block;
 }
 
 .status {
@@ -52,22 +63,23 @@ body {
   border-radius: 50%;
 }
 
-.online {
-  background: #22c55e;
-}
-
-.offline {
-  background: #ef4444;
-}
+.online { background: #22c55e; }
+.offline { background: #ef4444; }
 
 .proxy {
-  font-size: 14px;
+  font-size: 13px;
   margin-bottom: 10px;
   word-break: break-all;
   font-family: "Consolas", monospace;
   background: #0f172a;
   padding: 8px;
   border-radius: 6px;
+  border: 1px solid #334155;
+  color: #3b82f6; /* Màu xanh cho proxy cố định */
+}
+
+.proxy.dynamic {
+  color: #e2e8f0; /* Màu trắng cho proxy động */
 }
 
 .time {
@@ -91,7 +103,6 @@ body {
   transition: width 0.5s;
 }
 
-/* --- New Button Styles --- */
 .download-btn {
   display: flex;
   align-items: center;
@@ -108,14 +119,8 @@ body {
   transition: background 0.2s, transform 0.1s;
 }
 
-.download-btn:hover {
-  background: #2563eb;
-}
-
-.download-btn:active {
-  transform: scale(0.98);
-}
-/* ------------------------- */
+.download-btn:hover { background: #2563eb; }
+.download-btn:active { transform: scale(0.98); }
 
 .footer {
   text-align: center;
@@ -129,15 +134,27 @@ body {
 <body>
 
 <div class="container">
-  <div class="title">🚀 Proxy Status</div>
+  <div class="title">🚀 Proxy System</div>
 
+  <!-- Card Proxy Cố Định -->
   <div class="card">
+    <span class="label">Fixed Proxy (Always On)</span>
+    <div class="status">
+      <div class="dot online"></div>
+      <span>SOCKS5 Static</span>
+    </div>
+    <div class="proxy">socks5://frp.freefrp.net:31701</div>
+  </div>
+
+  <!-- Card Proxy Động -->
+  <div class="card">
+    <span class="label">Dynamic Tunnel</span>
     <div class="status">
       <div id="dot" class="dot offline"></div>
       <span id="statusText">Loading...</span>
     </div>
 
-    <div id="proxy" class="proxy"></div>
+    <div id="proxy" class="proxy dynamic"></div>
 
     <div class="time" id="timeInfo"></div>
 
@@ -154,7 +171,7 @@ body {
     </a>
   </div>
 
-  <div class="footer">The proxy will be refreshed every hour. Please install an extension that always connects to the proxy!</div>
+  <div class="footer">The dynamic proxy will be refreshed every hour.</div>
 </div>
 
 <script>
@@ -173,7 +190,6 @@ async function load() {
     const data = await res.json();
 
     const now = Math.floor(Date.now() / 1000);
-
     const start = data.start_time;
     const end = data.end_time || (start + 3600);
 
@@ -187,34 +203,20 @@ async function load() {
     const timeEl = document.getElementById("timeInfo");
     const bar = document.getElementById("bar");
 
-    // offline
     if (now >= end) {
       dot.className = "dot offline";
       statusText.innerText = "Service Unavailable";
-
       proxyEl.innerText = `${data.host}:${data.port}`;
-
-      timeEl.innerHTML = `
-        ⛔ Proxy expired<br>
-        ⏱ Total time: ${format(total)}
-      `;
-
+      timeEl.innerHTML = `⛔ Proxy expired<br>⏱ Total: ${format(total)}`;
       bar.style.width = "100%";
       bar.style.background = "#ef4444";
-
       return;
     }
 
-    // working
     dot.className = "dot online";
     statusText.innerText = "Working";
-
     proxyEl.innerText = `${data.host}:${data.port}`;
-
-    timeEl.innerHTML = `
-      ⏱ Running: ${format(elapsed)}<br>
-      ⏳ Remaining: ${format(remaining)}
-    `;
+    timeEl.innerHTML = `⏱ Running: ${format(elapsed)}<br>⏳ Remaining: ${format(remaining)}`;
 
     const percent = Math.min((elapsed / total) * 100, 100);
     bar.style.width = percent + "%";
@@ -223,9 +225,6 @@ async function load() {
   } catch (e) {
     document.getElementById("dot").className = "dot offline";
     document.getElementById("statusText").innerText = "Unable to fetch proxy";
-    document.getElementById("proxy").innerText = "";
-    document.getElementById("timeInfo").innerText = "";
-    document.getElementById("bar").style.width = "0%";
   }
 }
 
