@@ -1,8 +1,8 @@
 {
-    "host": "fllkc-172-178-119-19.run.pinggy-free.link",
-    "port": 40623,
+    "host": "psmci-20-127-238-129.run.pinggy-free.link",
+    "port": 43869,
     "auth": null,
-    "ip": "172.178.119.19",
-    "start_time": 1778654756,
-    "end_time": 1778658356
+    "ip": "20.127.238.129",
+    "start_time": 1778657768,
+    "end_time": 1778661368
 }
