@@ -136,31 +136,14 @@ body {
 <div class="container">
   <div class="title">🚀 Proxy System</div>
 
-  <!-- Card Proxy Cố Định -->
   <div class="card">
-    <span class="label">Fixed Proxy (Always On)</span>
+    <span class="label">Free Proxy Server</span>
     <div class="status">
       <div class="dot online"></div>
       <span>SOCKS5 Static</span>
     </div>
     <div class="proxy">socks5://frp.freefrp.net:31701</div>
   </div>
-
-  <!-- Card Proxy Động -->
-  <div class="card">
-    <span class="label">Dynamic Tunnel</span>
-    <div class="status">
-      <div id="dot" class="dot offline"></div>
-      <span id="statusText">Loading...</span>
-    </div>
-
-    <div id="proxy" class="proxy dynamic"></div>
-
-    <div class="time" id="timeInfo"></div>
-
-    <div class="progress">
-      <div id="bar" class="bar"></div>
-    </div>
 
     <a href="https://github.com/kokoromagic/Proxy/releases/latest" target="_blank" class="download-btn">
       <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
@@ -173,64 +156,6 @@ body {
 
   <div class="footer">The dynamic proxy will be refreshed every hour.</div>
 </div>
-
-<script>
-const API = "/Proxy/pinggy_tunnel_info.json";
-
-function format(sec) {
-  sec = Math.max(sec, 0);
-  const m = Math.floor(sec / 60);
-  const s = sec % 60;
-  return `${m}m ${s}s`;
-}
-
-async function load() {
-  try {
-    const res = await fetch(API + "?t=" + Date.now());
-    const data = await res.json();
-
-    const now = Math.floor(Date.now() / 1000);
-    const start = data.start_time;
-    const end = data.end_time || (start + 3600);
-
-    const elapsed = now - start;
-    const remaining = end - now;
-    const total = end - start;
-
-    const dot = document.getElementById("dot");
-    const statusText = document.getElementById("statusText");
-    const proxyEl = document.getElementById("proxy");
-    const timeEl = document.getElementById("timeInfo");
-    const bar = document.getElementById("bar");
-
-    if (now >= end) {
-      dot.className = "dot offline";
-      statusText.innerText = "Service Unavailable";
-      proxyEl.innerText = `${data.host}:${data.port}`;
-      timeEl.innerHTML = `⛔ Proxy expired<br>⏱ Total: ${format(total)}`;
-      bar.style.width = "100%";
-      bar.style.background = "#ef4444";
-      return;
-    }
-
-    dot.className = "dot online";
-    statusText.innerText = "Working";
-    proxyEl.innerText = `${data.host}:${data.port}`;
-    timeEl.innerHTML = `⏱ Running: ${format(elapsed)}<br>⏳ Remaining: ${format(remaining)}`;
-
-    const percent = Math.min((elapsed / total) * 100, 100);
-    bar.style.width = percent + "%";
-    bar.style.background = "linear-gradient(90deg, #22c55e, #4ade80)";
-
-  } catch (e) {
-    document.getElementById("dot").className = "dot offline";
-    document.getElementById("statusText").innerText = "Unable to fetch proxy";
-  }
-}
-
-load();
-setInterval(load, 5000);
-</script>
 
 </body>
 </html>
