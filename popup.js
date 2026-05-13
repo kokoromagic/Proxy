@@ -1,55 +1,45 @@
-const dot = document.getElementById("dot");
-const statusText = document.getElementById("statusText");
-const proxyInfo = document.getElementById("proxyInfo");
-const ipInfo = document.getElementById("ipInfo");
-const manualFields = document.getElementById("manualFields");
-
-document.getElementsByName("mode").forEach(radio => {
-    radio.onchange = (e) => {
-        manualFields.style.display = e.target.value === "manual" ? "flex" : "none";
-    };
-});
-
 async function updateUI() {
-    const data = await chrome.storage.local.get(["connected", "proxy", "ip"]);
+    const data = await chrome.storage.local.get(["connected", "proxy", "ip", "status"]);
+    const dot = document.getElementById("dot");
+    const statusText = document.getElementById("statusText");
+    const ipInfo = document.getElementById("ipInfo");
 
-    if (data.connected && data.proxy) {
+    if (data.status === "connecting") {
+        dot.className = "dot";
+        dot.style.background = "orange";
+        statusText.innerText = "Connecting...";
+        ipInfo.innerText = "Verifying proxy...";
+    } else if (data.connected) {
         dot.className = "dot connected";
+        dot.style.background = "#22c55e";
         statusText.innerText = "Connected";
-        proxyInfo.innerText = `${data.proxy.scheme || 'PROXY'} ${data.proxy.host}:${data.proxy.port}`;
         ipInfo.innerText = `IP: ${data.ip || "..."}`;
+        
+        if (data.proxy) {
+            document.getElementById("scheme").value = data.proxy.scheme;
+            document.getElementById("host").value = data.proxy.host;
+            document.getElementById("port").value = data.proxy.port;
+        }
     } else {
         dot.className = "dot disconnected";
-        statusText.innerText = "Disconnected";
-        proxyInfo.innerText = "";
-        ipInfo.innerText = "";
+        dot.style.background = "#ef4444";
+        statusText.innerText = data.status === "failed" ? "Connection Failed" : "Disconnected";
+        ipInfo.innerText = data.status === "failed" ? "Proxy unreachable" : "";
     }
 }
 
-document.getElementById("connect").onclick = async () => {
-    const mode = document.querySelector('input[name="mode"]:checked').value;
-    let config = { action: "connect", mode: mode };
-
-    if (mode === "manual") {
-        config.manualData = {
-            scheme: document.getElementById("manualScheme").value,
-            host: document.getElementById("manualHost").value,
-            port: document.getElementById("manualPort").value
-        };
-    }
-
-    chrome.runtime.sendMessage(config);
-
-    dot.className = "dot connected";
-    statusText.innerText = mode === "manual" ? "Connecting (Manual)..." : "Connecting (Auto)...";
+document.getElementById("connect").onclick = () => {
+    const proxyData = {
+        scheme: document.getElementById("scheme").value,
+        host: document.getElementById("host").value,
+        port: document.getElementById("port").value
+    };
+    chrome.runtime.sendMessage({ action: "connect", proxyData });
 };
 
 document.getElementById("disconnect").onclick = () => {
     chrome.runtime.sendMessage({ action: "disconnect" });
 };
 
-chrome.storage.onChanged.addListener((changes, area) => {
-    if (area === "local") updateUI();
-});
-
+chrome.storage.onChanged.addListener(updateUI);
 updateUI();

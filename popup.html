@@ -134,26 +134,17 @@
     <div class="card">
       <div class="status">
         <div id="dot" class="dot"></div>
-        <span id="statusText">Checking status...</span>
+        <span id="statusText">Ready</span>
       </div>
 
-      <div class="mode-selector">
-        <input type="radio" id="modeAuto" name="mode" value="auto" checked>
-        <label for="modeAuto">Auto (API)</label>
-        <input type="radio" id="modeManual" name="mode" value="manual">
-        <label for="modeManual">Manual</label>
-      </div>
-
-      <div id="manualFields" class="manual-fields">
-        <select id="manualScheme">
+      <div class="manual-fields" style="display: flex; flex-direction: column; gap: 8px; margin-top: 10px;">
+        <select id="scheme">
           <option value="SOCKS5">SOCKS5</option>
           <option value="PROXY">HTTP</option>
         </select>
-        <input type="text" id="manualHost" placeholder="Host" value="frp.freefrp.net">
-        <input type="number" id="manualPort" placeholder="Port" value="31701">
+        <input type="text" id="host" value="frp.freefrp.net">
+        <input type="number" id="port" value="31701">
       </div>
-
-      <div class="info" id="proxyInfo"></div>
       <div class="ip" id="ipInfo"></div>
     </div>
 
