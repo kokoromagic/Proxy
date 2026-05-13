@@ -13,19 +13,14 @@ async function fetchProxy() {
  * Configure proxy using a PAC Script
  * This allows per-site rules and a strict Kill Switch
  */
-function setProxy(host, port) {
-    // PAC Script Logic:
-    // 1. If host matches bypass list -> DIRECT (No Proxy)
-    // 2. Otherwise -> Use PROXY. 
-    // Note: We omit "; DIRECT" at the end to ensure that if the proxy dies, 
-    // the connection drops instead of leaking the real IP.
+function setProxy(host, port, scheme = "PROXY") {
     const pacScript = `
         function FindProxyForURL(url, host) {
             var bypass = ${JSON.stringify(BYPASS_LIST)};
             for (var i = 0; i < bypass.length; i++) {
                 if (dnsDomainIs(host, bypass[i])) return "DIRECT";
             }
-            return "PROXY ${host}:${port}";
+            return "${scheme} ${host}:${port}";
         }
     `;
 
@@ -33,9 +28,7 @@ function setProxy(host, port) {
         chrome.proxy.settings.set({
             value: {
                 mode: "pac_script",
-                pacScript: {
-                    data: pacScript
-                }
+                pacScript: { data: pacScript }
             },
             scope: "regular"
         }, resolve);
@@ -95,18 +88,29 @@ async function checkProxyAlive(timeout = 5000) {
 /**
  * Core connection logic
  */
-async function connect() {
+async function connect(manualData = null) {
     try {
-        const proxy = await fetchProxy();
-        await setProxy(proxy.host, proxy.port);
+        let proxy;
+        if (manualData) {
+            proxy = { 
+                host: manualData.host, 
+                port: manualData.port, 
+                scheme: manualData.scheme,
+                isManual: true 
+            };
+        } else {
+            const apiData = await fetchProxy();
+            proxy = { ...apiData, scheme: "PROXY", isManual: false };
+        }
 
-        // Small delay to let the browser apply proxy settings before checking IP
+        await setProxy(proxy.host, proxy.port, proxy.scheme);
+
         setTimeout(async () => {
             const ip = await getIP();
             const ok = await checkProxyAlive();
 
             if (!ok) {
-                console.error("Proxy unreachable on connect. Aborting.");
+                console.error("Proxy unreachable. Aborting.");
                 await disconnect();
                 return;
             }
@@ -118,7 +122,10 @@ async function connect() {
                 extensionControlled: true
             });
 
-            scheduleRefresh(proxy.start_time);
+            // Chỉ schedule refresh nếu là proxy từ API (có start_time)
+            if (!proxy.isManual && proxy.start_time) {
+                scheduleRefresh(proxy.start_time);
+            }
         }, 2000);
 
     } catch (e) {
@@ -171,7 +178,9 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 
 // Handle messages from Popup or Content Scripts
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
-    if (msg.action === "connect") connect();
+    if (msg.action === "connect") {
+        connect(msg.mode === "manual" ? msg.manualData : null);
+    }
     if (msg.action === "disconnect") disconnect();
 });
 

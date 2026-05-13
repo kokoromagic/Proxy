@@ -97,6 +97,34 @@
       color: #38bdf8;
     }
 
+    .mode-selector {
+      margin-bottom: 12px;
+      display: flex;
+      gap: 8px;
+    }
+    
+    .mode-selector label {
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .manual-fields {
+      display: none;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 10px;
+      border-top: 1px solid #334155;
+      padding-top: 10px;
+    }
+
+    input, select {
+      background: #334155;
+      border: 1px solid #475569;
+      color: white;
+      padding: 6px;
+      border-radius: 4px;
+      font-size: 12px;
+    }
   </style>
 </head>
 <body>
@@ -107,6 +135,22 @@
       <div class="status">
         <div id="dot" class="dot"></div>
         <span id="statusText">Checking status...</span>
+      </div>
+
+      <div class="mode-selector">
+        <input type="radio" id="modeAuto" name="mode" value="auto" checked>
+        <label for="modeAuto">Auto (API)</label>
+        <input type="radio" id="modeManual" name="mode" value="manual">
+        <label for="modeManual">Manual</label>
+      </div>
+
+      <div id="manualFields" class="manual-fields">
+        <select id="manualScheme">
+          <option value="SOCKS5">SOCKS5</option>
+          <option value="PROXY">HTTP</option>
+        </select>
+        <input type="text" id="manualHost" placeholder="Host" value="frp.freefrp.net">
+        <input type="number" id="manualPort" placeholder="Port" value="31701">
       </div>
 
       <div class="info" id="proxyInfo"></div>
