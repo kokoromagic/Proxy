@@ -110,7 +110,7 @@ async function connect(manualData = null) {
             const ok = await checkProxyAlive();
 
             if (!ok) {
-                console.error("Proxy unreachable. Aborting.");
+                console.error("Proxy unreachable. Abort!");
                 await disconnect();
                 return;
             }
@@ -119,17 +119,19 @@ async function connect(manualData = null) {
                 connected: true,
                 proxy: proxy,
                 ip: ip,
-                extensionControlled: true
+                extensionControlled: true,
+                isManual: proxy.isManual
             });
 
-            // Chỉ schedule refresh nếu là proxy từ API (có start_time)
             if (!proxy.isManual && proxy.start_time) {
                 scheduleRefresh(proxy.start_time);
+            } else {
+                chrome.alarms.clear("refreshProxy"); // Xóa mọi lịch refresh cũ
             }
         }, 2000);
 
     } catch (e) {
-        console.error("Connection flow error:", e);
+        console.error("Lỗi kết nối:", e);
         await disconnect();
     }
 }
@@ -152,12 +154,16 @@ async function disconnect() {
  * Handle automatic reconnection
  */
 async function reconnect() {
-    const data = await chrome.storage.local.get(["connected", "extensionControlled"]);
+    const data = await chrome.storage.local.get(["connected", "extensionControlled", "isManual", "proxy"]);
     if (!data.connected || !data.extensionControlled) return;
     
-    // Clear first to prevent potential overlaps during handshake
     await clearProxy(); 
-    await connect();
+    
+    if (data.isManual) {
+        await connect(data.proxy);
+    } else {
+        await connect();
+    }
 }
 
 /**

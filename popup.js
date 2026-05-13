@@ -26,7 +26,7 @@ async function updateUI() {
     }
 }
 
-document.getElementById("connect").onclick = () => {
+document.getElementById("connect").onclick = async () => {
     const mode = document.querySelector('input[name="mode"]:checked').value;
     let config = { action: "connect", mode: mode };
 
@@ -39,7 +39,9 @@ document.getElementById("connect").onclick = () => {
     }
 
     chrome.runtime.sendMessage(config);
-    statusText.innerText = "Connecting...";
+
+    dot.className = "dot connected";
+    statusText.innerText = mode === "manual" ? "Connecting (Manual)..." : "Connecting (Auto)...";
 };
 
 document.getElementById("disconnect").onclick = () => {
