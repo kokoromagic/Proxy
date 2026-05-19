@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Simple Proxy Connector",
-  "version": "3.0",
+  "version": "3.1",
   "permissions": [
     "proxy",
     "storage",
@@ -17,6 +17,18 @@
     "service_worker": "background.js"
   },
   "action": {
-    "default_popup": "popup.html"
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "earth.png",
+      "48": "earth.png",
+      "128": "earth.png",
+      "512": "earth.png"
+    }
+  },
+  "icons": {
+    "16": "earth.png",
+    "48": "earth.png",
+    "128": "earth.png",
+    "512": "earth.png"
   }
 }
