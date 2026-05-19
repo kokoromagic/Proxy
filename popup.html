@@ -55,13 +55,6 @@
       background: #ef4444;
     }
 
-    .info {
-      margin-top: 8px;
-      font-size: 12px;
-      opacity: 0.8;
-      line-height: 1.4;
-    }
-
     .btn {
       width: 100%;
       padding: 10px;
@@ -97,19 +90,8 @@
       color: #38bdf8;
     }
 
-    .mode-selector {
-      margin-bottom: 12px;
-      display: flex;
-      gap: 8px;
-    }
-    
-    .mode-selector label {
-      font-size: 12px;
-      cursor: pointer;
-    }
-
     .manual-fields {
-      display: none;
+      display: flex;
       flex-direction: column;
       gap: 8px;
       margin-top: 10px;
@@ -137,13 +119,15 @@
         <span id="statusText">Ready</span>
       </div>
 
-      <div class="manual-fields" style="display: flex; flex-direction: column; gap: 8px; margin-top: 10px;">
+      <div class="manual-fields">
         <select id="scheme">
           <option value="SOCKS5">SOCKS5</option>
           <option value="PROXY">HTTP</option>
         </select>
-        <input type="text" id="host" value="frp.freefrp.net">
-        <input type="number" id="port" value="31701">
+        <input type="text" id="host" value="frp.freefrp.net" placeholder="Host">
+        <input type="number" id="port" value="31701" placeholder="Port">
+        <input type="text" id="username" placeholder="Username (Optional)">
+        <input type="password" id="password" placeholder="Password (Optional)">
       </div>
       <div class="ip" id="ipInfo"></div>
     </div>

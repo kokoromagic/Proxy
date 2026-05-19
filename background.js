@@ -2,8 +2,13 @@ const BYPASS_LIST = ["kokoromagic.github.io"];
 const DEFAULT_PROXY = {
     host: "frp.freefrp.net",
     port: "31701",
-    scheme: "SOCKS5"
+    scheme: "SOCKS5",
+    username: "",
+    password: ""
 };
+
+// Biến tạm để lưu thông tin xác thực khi proxy đang chạy
+let currentAuth = { username: "", password: "" };
 
 function setProxy(host, port, scheme) {
     const pacScript = `
@@ -23,6 +28,23 @@ function setProxy(host, port, scheme) {
     });
 }
 
+// Lắng nghe yêu cầu xác thực từ Proxy
+chrome.webRequest.onAuthRequired.addListener(
+    (details) => {
+        if (details.isProxy && currentAuth.username && currentAuth.password) {
+            return {
+                authCredentials: {
+                    username: currentAuth.username,
+                    password: currentAuth.password
+                }
+            };
+        }
+        return {};
+    },
+    { urls: ["<all_urls>"] },
+    ["blocking"]
+);
+
 async function getIP() {
     try {
         const controller = new AbortController();
@@ -36,12 +58,14 @@ async function getIP() {
 async function connect(proxyData) {
     const proxy = proxyData || DEFAULT_PROXY;
     
-    // Đặt trạng thái đang kết nối
-    await chrome.storage.local.set({ status: "connecting", connected: false });
+    // Cập nhật thông tin auth vào biến tạm
+    currentAuth.username = proxy.username || "";
+    currentAuth.password = proxy.password || "";
     
+    await chrome.storage.local.set({ status: "connecting", connected: false });
     await setProxy(proxy.host, proxy.port, proxy.scheme);
 
-    // Chờ 2 giây để proxy áp dụng rồi kiểm tra IP
+    // Tăng thời gian chờ lên 3 giây nếu có auth để proxy kịp xác thực
     setTimeout(async () => {
         const ip = await getIP();
         if (ip) {
@@ -52,19 +76,20 @@ async function connect(proxyData) {
                 ip: ip
             });
         } else {
-            // Nếu không lấy được IP tức là proxy lỗi
             await chrome.proxy.settings.clear({});
+            currentAuth = { username: "", password: "" }; // Xóa auth nếu lỗi
             await chrome.storage.local.set({
                 connected: false,
                 status: "failed",
                 ip: "Connection Error"
             });
         }
-    }, 2000);
+    }, 3000);
 }
 
 async function disconnect() {
     await chrome.proxy.settings.clear({});
+    currentAuth = { username: "", password: "" }; // Xóa auth khi tắt
     await chrome.storage.local.set({
         connected: false,
         status: "disconnected",

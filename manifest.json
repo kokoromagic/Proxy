@@ -1,17 +1,20 @@
 {
   "manifest_version": 3,
   "name": "Simple Proxy Connector",
-  "version": "3.1",
+  "version": "3.2",
   "permissions": [
     "proxy",
     "storage",
     "alarms",
-    "tabs"
+    "tabs",
+    "webRequest",
+    "webRequestAuthProvider"
   ],
   "host_permissions": [
     "https://kokoromagic.github.io/*",
     "https://api.ipify.org/*",
-    "http://connectivitycheck.gstatic.com/*"
+    "http://connectivitycheck.gstatic.com/*",
+    "<all_urls>"
   ],
   "background": {
     "service_worker": "background.js"

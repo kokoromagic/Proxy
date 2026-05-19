@@ -19,6 +19,8 @@ async function updateUI() {
             document.getElementById("scheme").value = data.proxy.scheme;
             document.getElementById("host").value = data.proxy.host;
             document.getElementById("port").value = data.proxy.port;
+            document.getElementById("username").value = data.proxy.username || "";
+            document.getElementById("password").value = data.proxy.password || "";
         }
     } else {
         dot.className = "dot disconnected";
@@ -32,7 +34,9 @@ document.getElementById("connect").onclick = () => {
     const proxyData = {
         scheme: document.getElementById("scheme").value,
         host: document.getElementById("host").value,
-        port: document.getElementById("port").value
+        port: document.getElementById("port").value,
+        username: document.getElementById("username").value.trim(),
+        password: document.getElementById("password").value
     };
     chrome.runtime.sendMessage({ action: "connect", proxyData });
 };
