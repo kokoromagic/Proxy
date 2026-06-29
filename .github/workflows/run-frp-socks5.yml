@@ -33,6 +33,22 @@ jobs:
           python3 download-service.py
           python3 download-cloudflared.py
 
+      - name: Setup and Run Xray Server
+        env:
+          XRAY_CONFIG_DATA: ${{ secrets.XRAY_CONFIG }}
+        run: |
+          echo "$XRAY_CONFIG_DATA" > config.json
+          
+          echo "Downloading Xray..."
+          curl -L -s https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip -o xray.zip
+          unzip -q xray.zip -d xray-bin
+          chmod +x xray-bin/xray
+          
+          echo "Starting Xray server..."
+          ./xray-bin/xray run -c config.json &
+          
+          sleep 2
+
       - name: Start Main Application
         env:
           BRIDGE_WORKFLOWS: ${{ github.event.inputs.bridge_workflows }}
