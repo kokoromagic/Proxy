@@ -1,139 +1,290 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Magic Proxy Connector</title>
   <style>
+    :root {
+      --bg-main: #0b0f19;
+      --bg-card: #151d30;
+      --bg-input: #1e2942;
+      --border-color: #2a3b5c;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --primary: #3b82f6;
+      --primary-hover: #2563eb;
+      --success: #10b981;
+      --danger: #ef4444;
+      --warning: #f59e0b;
+    }
+
     * {
       box-sizing: border-box;
-      font-family: "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     }
 
     body {
-      margin: 0;
-      width: 280px;
-      background: #0f172a;
-      color: #e2e8f0;
+      width: 320px;
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      padding: 14px;
     }
 
-    .container {
-      padding: 16px;
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border-color);
     }
 
-    .title {
-      font-size: 16px;
-      font-weight: 600;
-      margin-bottom: 12px;
+    .brand-title {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      background: linear-gradient(to right, #3b82f6, #60a5fa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
-    .card {
-      background: #1e293b;
+    .status-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
       border-radius: 12px;
       padding: 12px;
       margin-bottom: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    }
-
-    .status {
       display: flex;
       align-items: center;
-      gap: 8px;
-      font-size: 13px;
+      justify-content: space-between;
+    }
+
+    .status-info {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .status-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+    }
+
+    .status-value {
+      font-size: 14px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
 
     .dot {
-      width: 10px;
-      height: 10px;
+      width: 8px;
+      height: 8px;
       border-radius: 50%;
-      background: gray;
+      background: var(--text-muted);
+      box-shadow: 0 0 8px var(--text-muted);
     }
 
-    .connected {
-      background: #22c55e;
+    .dot.connected { background: var(--success); box-shadow: 0 0 10px var(--success); }
+    .dot.disconnected { background: var(--danger); box-shadow: 0 0 10px var(--danger); }
+    .dot.connecting { background: var(--warning); box-shadow: 0 0 10px var(--warning); }
+
+    .ip-display {
+      font-size: 12px;
+      font-family: monospace;
+      color: #38bdf8;
+      background: rgba(56, 189, 248, 0.1);
+      padding: 2px 6px;
+      border-radius: 4px;
     }
 
-    .disconnected {
-      background: #ef4444;
+    .panel-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .config-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 12px;
+      margin-bottom: 12px;
+    }
+
+    .form-group {
+      margin-bottom: 10px;
+    }
+
+    .form-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    label {
+      display: block;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    select, input {
+      width: 100%;
+      background: var(--bg-input);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      color: var(--text-main);
+      padding: 8px 10px;
+      font-size: 13px;
+      transition: all 0.2s;
+    }
+
+    select:focus, input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+    }
+
+    /* Profile Action Row */
+    .profile-actions {
+      display: flex;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .btn-sm {
+      padding: 6px 10px;
+      font-size: 11px;
+      font-weight: 600;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn-sm-primary { background: var(--primary); color: white; }
+    .btn-sm-secondary { background: #2a3b5c; color: var(--text-main); }
+    .btn-sm-danger { background: #37212b; color: var(--danger); }
+    .btn-sm-danger:hover { background: var(--danger); color: white; }
+
+    .actions {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
 
     .btn {
       width: 100%;
       padding: 10px;
       border: none;
-      border-radius: 10px;
+      border-radius: 8px;
+      font-size: 13px;
       font-weight: 600;
       cursor: pointer;
-      transition: 0.2s;
-    }
-
-    .connect {
-      background: #22c55e;
-      color: white;
-    }
-
-    .connect:hover {
-      background: #16a34a;
-    }
-
-    .disconnect {
-      background: #ef4444;
-      color: white;
-      margin-top: 8px;
-    }
-
-    .disconnect:hover {
-      background: #dc2626;
-    }
-
-    .ip {
-      font-size: 12px;
-      margin-top: 6px;
-      color: #38bdf8;
-    }
-
-    .manual-fields {
       display: flex;
-      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       gap: 8px;
-      margin-top: 10px;
-      border-top: 1px solid #334155;
-      padding-top: 10px;
+      transition: all 0.2s;
     }
 
-    input, select {
-      background: #334155;
-      border: 1px solid #475569;
-      color: white;
-      padding: 6px;
-      border-radius: 4px;
-      font-size: 12px;
+    .btn-connect { background: var(--primary); color: white; }
+    .btn-connect:hover { background: var(--primary-hover); }
+    .btn-disconnect {
+      background: #271c24;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: var(--danger);
     }
+    .btn-disconnect:hover { background: var(--danger); color: white; }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="title">🚀 Proxy Controller</div>
 
-    <div class="card">
-      <div class="status">
+  <div class="header">
+    <div class="brand"><span class="brand-title">✨ MAGIC PROXY</span></div>
+  </div>
+
+  <div class="status-card">
+    <div class="status-info">
+      <span class="status-label">Status</span>
+      <div class="status-value">
         <div id="dot" class="dot"></div>
-        <span id="statusText">Ready</span>
+        <span id="statusText">Disconnected</span>
       </div>
+    </div>
+    <div id="ipContainer" style="display: none;">
+      <span id="ipInfo" class="ip-display">0.0.0.0</span>
+    </div>
+  </div>
 
-      <div class="manual-fields">
-        <select id="scheme">
-          <option value="SOCKS5">SOCKS5</option>
-          <option value="PROXY">HTTP</option>
-        </select>
-        <input type="text" id="host" value="frp.freefrp.net" placeholder="Host">
-        <input type="number" id="port" value="31701" placeholder="Port">
-        <input type="text" id="username" placeholder="Username (Optional)">
-        <input type="password" id="password" placeholder="Password (Optional)">
-      </div>
-      <div class="ip" id="ipInfo"></div>
+  <div class="panel-title">Proxy Profiles</div>
+  <div class="config-card">
+    <div class="form-group">
+      <label for="profileSelect">Select Profile</label>
+      <select id="profileSelect">
+        <option value="">-- Manual Input --</option>
+      </select>
+    </div>
+    <div class="profile-actions">
+      <button id="saveProfile" class="btn-sm btn-sm-primary">Save Current</button>
+      <button id="renameProfile" class="btn-sm btn-sm-secondary">Rename</button>
+      <button id="deleteProfile" class="btn-sm btn-sm-danger">Delete</button>
+    </div>
+  </div>
+
+  <div class="panel-title">Proxy Details</div>
+  <div class="config-card">
+    <div class="form-group">
+      <label for="scheme">Protocol</label>
+      <select id="scheme">
+        <option value="SOCKS5">SOCKS5</option>
+        <option value="PROXY">HTTP</option>
+      </select>
     </div>
 
-    <button id="connect" class="btn connect">CONNECT</button>
-    <button id="disconnect" class="btn disconnect">STOP</button>
+    <div class="form-group">
+      <div class="form-row">
+        <div style="flex: 2;">
+          <label for="host">Server Address</label>
+          <input type="text" id="host" placeholder="127.0.0.1">
+        </div>
+        <div style="flex: 1;">
+          <label for="port">Port</label>
+          <input type="number" id="port" placeholder="1080">
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="form-row">
+        <div>
+          <label for="username">Username (Optional)</label>
+          <input type="text" id="username" placeholder="user">
+        </div>
+        <div>
+          <label for="password">Password (Optional)</label>
+          <input type="password" id="password" placeholder="pass">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button id="connect" class="btn btn-connect">START PROXY</button>
+    <button id="disconnect" class="btn btn-disconnect" style="display: none;">STOP CONNECTION</button>
   </div>
 
   <script src="popup.js"></script>
