@@ -1,0 +1,57 @@
+name: SOCKS5 FRP
+on:
+  workflow_dispatch:
+    inputs:
+      bridge_workflows:
+        description: "Bridge the workflows"
+        default: false
+        required: false
+        type: boolean
+
+jobs:
+  run-proxy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          repository: vincentng295/frp_socks5_proxy
+          ref: main
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          python3 -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Download Binaries
+        run: |
+          python3 download-service.py
+          python3 download-cloudflared.py
+
+      - name: Setup Xray Server
+        env:
+          XRAY_CONFIG_DATA: ${{ secrets.XRAY_CONFIG }}
+        run: |
+          echo "$XRAY_CONFIG_DATA" > config.json
+          
+          echo "Downloading Xray..."
+          curl -L -s https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip -o xray.zip
+          unzip -q xray.zip -d xray-bin
+          chmod +x xray-bin/xray
+
+      - name: Start Main Application
+        env:
+          BRIDGE_WORKFLOWS: ${{ github.event.inputs.bridge_workflows }}
+          ENV_CONFIG: ${{ secrets.ENV_CONFIG }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PYTHONUNBUFFERED: 1
+        run: |
+          echo "Starting Xray server..."
+          ./xray-bin/xray run -c config.json &
+          sleep 2
+          python3 github-workflows.py
